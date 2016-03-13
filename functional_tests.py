@@ -1,9 +1,17 @@
 from selenium import webdriver
+import unittest
 
-browser = webdriver.Firefox()
+class CommonTest(unittest.TestCase):
+	def setUp(self):
+		self.browser = webdriver.Firefox()
+		self.browser.implicitly_wait(3)
 
-browser.get('http://localhost:8000')
+	def tearDown(self):
+		self.browser.quit()
 
-assert 'To-Do' in browser.title
+	def test_site_title(self):
+		self.browser.get('http://localhost:8000')
+		self.assertIn('Pomodoro', self.browser.title)
 
-browser.quit()
+if __name__ == '__main__':
+	unittest.main(warnings='ignore')
