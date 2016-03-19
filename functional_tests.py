@@ -22,7 +22,7 @@ class CommonTest(unittest.TestCase):
 		inputbox.send_keys(Keys.ENTER)
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertTrue(any(row.text=='1: write code' for row in rows))
+		self.assertTrue(any(row.text=='1: write code' for row in rows), "There is no new task in table.")
 		self.fail('Finish the test')
 
 if __name__ == '__main__':
