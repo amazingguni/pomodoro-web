@@ -20,9 +20,16 @@ class CommonTest(unittest.TestCase):
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'The task to do')
 		inputbox.send_keys('write code')
 		inputbox.send_keys(Keys.ENTER)
+
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		self.assertEqual(inputbox.get_attribute('placeholder'), 'The task to do')
+		inputbox.send_keys('make seminar data')
+		inputbox.send_keys(Keys.ENTER)
+
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertTrue(any(row.text=='1: write code' for row in rows), "There is no new task in table.")
+		self.assertIn('1: write code', [row.text for row in rows])
+		self.assertIn('2: make seminar data', [row.text for row in rows])
 		self.fail('Finish the test')
 
 if __name__ == '__main__':
