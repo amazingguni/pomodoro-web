@@ -10,6 +10,11 @@ class CommonTest(unittest.TestCase):
 	def tearDown(self):
 		self.browser.quit()
 
+	def check_for_row_in_list_table(self, row_text):
+		table = self.browser.find_element_by_id('id_list_table')
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn(row_text, [row.text for row in rows])
+
 	def test_add_task(self):
 		self.browser.get('http://localhost:8000')
 		self.assertIn('Pomodoro web', self.browser.title)
@@ -26,10 +31,8 @@ class CommonTest(unittest.TestCase):
 		inputbox.send_keys('make seminar data')
 		inputbox.send_keys(Keys.ENTER)
 
-		table = self.browser.find_element_by_id('id_list_table')
-		rows = table.find_elements_by_tag_name('tr')
-		self.assertIn('1: write code', [row.text for row in rows])
-		self.assertIn('2: make seminar data', [row.text for row in rows])
+		self.check_for_row_in_list_table('1: write code')
+		self.check_for_row_in_list_table('2: make seminar data')
 		self.fail('Finish the test')
 
 if __name__ == '__main__':
