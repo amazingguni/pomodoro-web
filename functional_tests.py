@@ -21,12 +21,12 @@ class CommonTest(unittest.TestCase):
 		header_text = self.browser.find_element_by_tag_name('h1').text
 		self.assertIn('To-Do', header_text)
 		
-		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox = self.browser.find_element_by_id('id_new_task')
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'The task to do')
 		inputbox.send_keys('write code')
 		inputbox.send_keys(Keys.ENTER)
 
-		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox = self.browser.find_element_by_id('id_new_task')
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'The task to do')
 		inputbox.send_keys('make seminar data')
 		inputbox.send_keys(Keys.ENTER)
