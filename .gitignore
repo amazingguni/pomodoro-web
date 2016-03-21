@@ -3,5 +3,4 @@ db.splite3
 *.sublime-*
 db.sqlite3
 *.swp
-migrations
 db.sqlite3

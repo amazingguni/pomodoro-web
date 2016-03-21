@@ -70,7 +70,5 @@ class TaskModelTest(TestCase):
 		first_saved_task = saved_tasks[0]
 		second_saved_task = saved_tasks[1]
 
-		print('title:%s created_date:%s' %(first_saved_task.title, first_saved_task.created_date))
-		print('title:%s created_date:%s' %(second_saved_task.title, second_saved_task.created_date))
 		self.assertEqual(first_saved_task.title, 'first task')
 		self.assertEqual(second_saved_task.title, 'second task')

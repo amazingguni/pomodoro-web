@@ -17,7 +17,7 @@ class CommonTest(LiveServerTestCase):
 		self.assertIn(row_title, [row.text for row in rows])
 
 	def test_add_task(self):
-		self.browser.get('http://localhost:8000')
+		self.browser.get(self.live_server_url)
 		self.assertIn('Pomodoro web', self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
 		self.assertIn('To-Do', header_text)
