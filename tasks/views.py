@@ -4,7 +4,7 @@ from tasks.models import Task
 
 def home_page(request):
 	if request.method == 'POST':
-		Task.objects.create(text=request.POST.get('task_text',''))
+		Task.objects.create(title=request.POST.get('task_title',''))
 		return redirect('/')
 	
 	tasks = Task.objects.all()

@@ -21,18 +21,18 @@ class HomePageTest(TestCase):
 	def test_home_page_can_save_a_POST_request(self):
 		request = HttpRequest()
 		request.method = 'POST'
-		request.POST['task_text'] = 'new task'
+		request.POST['task_title'] = 'new task'
 
 		response = home_page(request)
 
 		self.assertEqual(Task.objects.count(), 1)
 		new_task = Task.objects.first()
-		self.assertEqual(new_task.text, 'new task')
+		self.assertEqual(new_task.title, 'new task')
 
 	def test_home_page_redirects_after_POST(self):
 		request = HttpRequest()
 		request.method = 'POST'
-		request.POST['task_text'] = 'new task'
+		request.POST['task_title'] = 'new task'
 
 		response = home_page(request)
 
@@ -45,8 +45,8 @@ class HomePageTest(TestCase):
 		self.assertEqual(Task.objects.count(), 0)
 
 	def test_home_page_displays_all_list_tasks(self):
-		Task.objects.create(text='task 1')
-		Task.objects.create(text='task 2')
+		Task.objects.create(title='task 1')
+		Task.objects.create(title='task 2')
 		
 		request = HttpRequest()
 		response = home_page(request)
@@ -57,11 +57,11 @@ class HomePageTest(TestCase):
 class TaskModelTest(TestCase):
 	def test_saving_and_retrieving_tasks(self):
 		first_task = Task()
-		first_task.text = 'first task'
+		first_task.title = 'first task'
 		first_task.save()
 
 		second_task = Task()
-		second_task.text = 'second task'
+		second_task.title = 'second task'
 		second_task.save()
 
 		saved_tasks = Task.objects.all()
@@ -70,5 +70,7 @@ class TaskModelTest(TestCase):
 		first_saved_task = saved_tasks[0]
 		second_saved_task = saved_tasks[1]
 
-		self.assertEqual(first_saved_task.text, 'first task')
-		self.assertEqual(second_saved_task.text, 'second task')
+		print('title:%s created_date:%s' %(first_saved_task.title, first_saved_task.created_date))
+		print('title:%s created_date:%s' %(second_saved_task.title, second_saved_task.created_date))
+		self.assertEqual(first_saved_task.title, 'first task')
+		self.assertEqual(second_saved_task.title, 'second task')
