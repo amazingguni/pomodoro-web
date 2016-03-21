@@ -1,8 +1,9 @@
+from django.test import LiveServerTestCase
 from selenium import webdriver
 import unittest
 from selenium.webdriver.common.keys import Keys
 
-class CommonTest(unittest.TestCase):
+class CommonTest(LiveServerTestCase):
 	def setUp(self):
 		self.browser = webdriver.Firefox()
 		self.browser.implicitly_wait(3)
