@@ -26,6 +26,8 @@ class CommonTest(LiveServerTestCase):
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'The task to do')
 		inputbox.send_keys('write code')
 		inputbox.send_keys(Keys.ENTER)
+		list_url_a = self.browser.current_url
+		self.assertRegex(list_url_a, '/list/.+')
 
 		inputbox = self.browser.find_element_by_id('id_new_task')
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'The task to do')
@@ -34,7 +36,32 @@ class CommonTest(LiveServerTestCase):
 
 		self.check_for_row_in_list_table('1: write code')
 		self.check_for_row_in_list_table('2: make seminar data')
-		self.fail('Finish the test')
+		
+		
+		self.browser.quit()
+		self.browser = webdriver.Firefox()
+		
+		self.browser.get(self.live_server_url)
+		page_text = self.browser.find_element_by_tag_name('body').text
+		self.assertNotIn('write code', page_text)
+		self.assertNotIn('make seminar data', page_text)
+
+		inputbox = self.browser.find_element_by_id('id_new_task')
+		inputbox.send_keys('buy milk')
+		inputbox.send_keys(Keys.ENTER)
+
+		list_url_b = self.browser.current_url
+		self.assertRegex(list_url_b, '/list/.+')
+		self.assertNotEqual(list_url_a, list_url_b)
+
+		page_text = self.browser.find_element_by_tag_name('body').text
+		self.assertNotIn('write code', page_text)
+		self.assertIn('buy milk', page_text)
+
+
+
+
+
 
 if __name__ == '__main__':
 	unittest.main(warnings='ignore')
