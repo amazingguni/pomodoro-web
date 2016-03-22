@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-class Task(models.Model):
+class Item(models.Model):
 	title = models.TextField(default='')
 	created_date = models.DateTimeField(default=timezone.now)

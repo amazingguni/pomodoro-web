@@ -5,12 +5,12 @@
 	<body>
 		<h1>To-Do</h1>
 		<form method="POST">
-			<input name="task_title" id="id_new_task" placeholder='The task to do'/>
+			<input name="item_title" id="id_new_item" placeholder='The item to do'/>
 			{% csrf_token %}
 		</form>
 		<table id="id_list_table">
-			{% for task in tasks %}
-			<tr><td>{{ forloop.counter }}: {{ task.title }}</td></tr>
+			{% for item in lists %}
+			<tr><td>{{ forloop.counter }}: {{ item.title }}</td></tr>
 			{% endfor %}
 		</table>
 	</body>
