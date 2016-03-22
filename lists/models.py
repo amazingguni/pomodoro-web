@@ -1,6 +1,10 @@
 from django.db import models
 from django.utils import timezone
 
+class List(models.Model):
+	pass
+	
 class Item(models.Model):
 	text = models.TextField(default='')
-	created_date = models.DateTimeField(default=timezone.now)
+	list = models.ForeignKey(List, default=None)
+

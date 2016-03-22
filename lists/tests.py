@@ -3,7 +3,7 @@ from django.test import TestCase
 from lists.views import home_page
 from django.http import HttpRequest
 from django.template.loader import render_to_string
-from lists.models import Item
+from lists.models import Item, List
 
 class HomePageTest(TestCase):
 	def test_root_url_resolves_to_home_page_view(self):
@@ -19,24 +19,34 @@ class HomePageTest(TestCase):
 		self.assertEqual(response.content.decode(), expected_html)
 	
 
-class ItemModelTest(TestCase):
+class ListAndItemModelsTest(TestCase):
 	def test_saving_and_retrieving_lists(self):
+		list_ = List()
+		list_.save()
+
 		first_item = Item()
 		first_item.text = 'first item'
+		first_item.list = list_
 		first_item.save()
 
 		second_item = Item()
 		second_item.text = 'second item'
+		second_item.list = list_
 		second_item.save()
 
-		saved_lists = Item.objects.all()
-		self.assertEqual(saved_lists.count(), 2)
+		saved_list = List.objects.first()
+		self.assertEqual(saved_list, list_)
 
-		first_saved_item = saved_lists[0]
-		second_saved_item = saved_lists[1]
+		saved_items = Item.objects.all()
+		self.assertEqual(saved_items.count(), 2)
+
+		first_saved_item = saved_items[0]
+		second_saved_item = saved_items[1]
 
 		self.assertEqual(first_saved_item.text, 'first item')
+		self.assertEqual(first_saved_item.list, list_)
 		self.assertEqual(second_saved_item.text, 'second item')
+		self.assertEqual(second_saved_item.list, list_)
 
 
 class ListViewTest(TestCase):
@@ -45,8 +55,9 @@ class ListViewTest(TestCase):
 		self.assertTemplateUsed(response, 'list.html')
 
 	def test_display_all_items(self):
-		Item.objects.create(text='item 1')
-		Item.objects.create(text='item 2')
+		list_ = List.objects.create()
+		Item.objects.create(text='item 1', list=list_)
+		Item.objects.create(text='item 2', list=list_)
 
 		response = self.client.get('/lists/the-only-list-in-the-world/')
 
