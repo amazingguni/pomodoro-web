@@ -20,7 +20,7 @@ class CommonTest(LiveServerTestCase):
 		self.browser.get(self.live_server_url)
 		self.assertIn('Pomodoro web', self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
-		self.assertIn('To-Do', header_text)
+		self.assertIn('작업 목록 시작', header_text)
 		
 		inputbox = self.browser.find_element_by_id('id_new_item')
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'The item to do')
