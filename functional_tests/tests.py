@@ -16,8 +16,8 @@ class CommonTest(StaticLiveServerTestCase):
 
 	@classmethod
 	def tearDownClass(cls):
-		if cls.server_url == cls.live_server_url:
-			super().tearDownClass()
+		if hasattr(cls, 'live_server_url') and cls.server_url == cls.live_server_url:
+		    super().tearDownClass()
 
 	def setUp(self):
 		self.browser = webdriver.Firefox()
