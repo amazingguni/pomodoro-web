@@ -1,10 +1,4 @@
 from .base import FunctionalTest
-import sys
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from selenium import webdriver
-import unittest
-from selenium.webdriver.common.keys import Keys
-from unittest import skip
 
 class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
