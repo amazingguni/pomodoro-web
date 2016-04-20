@@ -1,5 +1,6 @@
 from .base import FunctionalTest
 
+
 class ItemValidationTest(FunctionalTest):
     def test_cannot_add_empty_list_items(self):
         # 에디스는 메인 페이지에 접속해서 비니 아이템을 실수로 등록하려고 한다.
@@ -28,4 +29,3 @@ class ItemValidationTest(FunctionalTest):
         self.browser.find_element_by_id('id_new_item').send_keys('tea 만들기\n')
         self.check_for_row_in_list_table('1: 우유사기')
         self.check_for_row_in_list_table('2: tea 만들기')
-
