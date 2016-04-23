@@ -12,14 +12,14 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn('작업 목록 시작', header_text)
 
         inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertEqual(inputbox.get_attribute('placeholder'), 'The item to do')
+        self.assertEqual(inputbox.get_attribute('placeholder'), '작업 아이템 입력')
         inputbox.send_keys('write code')
         inputbox.send_keys(Keys.ENTER)
         list_url_a = self.browser.current_url
         self.assertRegex(list_url_a, '/lists/.+')
 
         inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertEqual(inputbox.get_attribute('placeholder'), 'The item to do')
+        self.assertEqual(inputbox.get_attribute('placeholder'), '작업 아이템 입력')
         inputbox.send_keys('make seminar data')
         inputbox.send_keys(Keys.ENTER)
 
