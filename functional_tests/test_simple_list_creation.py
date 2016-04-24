@@ -11,14 +11,14 @@ class NewVisitorTest(FunctionalTest):
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('작업 목록 시작', header_text)
 
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         self.assertEqual(inputbox.get_attribute('placeholder'), '작업 아이템 입력')
         inputbox.send_keys('write code')
         inputbox.send_keys(Keys.ENTER)
         list_url_a = self.browser.current_url
         self.assertRegex(list_url_a, '/lists/.+')
 
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         self.assertEqual(inputbox.get_attribute('placeholder'), '작업 아이템 입력')
         inputbox.send_keys('make seminar data')
         inputbox.send_keys(Keys.ENTER)
@@ -34,7 +34,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertNotIn('write code', page_text)
         self.assertNotIn('make seminar data', page_text)
 
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         inputbox.send_keys('buy milk')
         inputbox.send_keys(Keys.ENTER)
 
