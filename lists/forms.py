@@ -32,7 +32,7 @@ class ExistingListItemForm(ItemForm):
         self.instance.list = for_list
 
     def save(self):
-        return super(self.instnace.list)
+        return forms.models.ModelForm.save(self)
 
     def validate_unique(self):
         try:
