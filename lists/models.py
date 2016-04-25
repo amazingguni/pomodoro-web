@@ -1,6 +1,5 @@
-from django.db import models
-from django.utils import timezone
 from django.core.urlresolvers import reverse
+from django.db import models
 
 
 class List(models.Model):
@@ -14,7 +13,7 @@ class Item(models.Model):
 
     class Meta:
         ordering = ('id',)
-        unique_together=('list', 'text')
+        unique_together = ('list', 'text')
 
     def __str__(self):
         return self.text
